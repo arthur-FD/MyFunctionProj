@@ -1,9 +1,9 @@
 {
     "azureFunctions.deploySubpath": ".",
     "azureFunctions.scmDoBuildDuringDeployment": true,
-    "azureFunctions.pythonVenv": ".venv",
+    "azureFunctions.pythonVenv": "venv_snow",
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~3",
     "debug.internalConsoleOptions": "neverOpen",
-    "python.pythonPath": "/home/arthur/projects/API_test/.venv/bin/python"
+    "python.pythonPath": "/home/arthur/projects/API_test/venv_snow/bin/python"
 }

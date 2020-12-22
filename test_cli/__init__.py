@@ -20,12 +20,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     with open(pathlib.Path(__file__).parent / "conf/funct_query.sql", "r") as file:
         core_query = file.read()
 
+    # conn = snowflake.connector.connect(
+    #     user=os.environ["USER_SF"],
+    #     password=os.environ["PSW_SF"],
+    #     account=os.environ["ACCOUNT_SF"],
+    #     **parameters["snowflake_config"]
+    # ) 
+
     conn = snowflake.connector.connect(
-        user=os.environ["USER_SF"],
-        password=os.environ["PSW_SF"],
-        account=os.environ["ACCOUNT_SF"],
+        user="PYTHON_TEST",
+        password="qFPkPD)d4_NHD#w^9^wh",
+        account="cl19237.west-europe.azure",
         **parameters["snowflake_config"]
     )    
+
     cur = conn.cursor()
     cur.execute(core_query)
     core_data = cur.fetch_pandas_all()
