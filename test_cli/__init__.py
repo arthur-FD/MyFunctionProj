@@ -27,16 +27,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         **parameters["snowflake_config"]
     ) 
 
-    # conn = snowflake.connector.connect(
-    #     user="PYTHON_TEST",
-    #     password="qFPkPD)d4_NHD#w^9^wh",
-    #     account="cl19237.west-europe.azure",
-    #     **parameters["snowflake_config"]
-    # )    
-
     cur = conn.cursor()
     cur.execute(core_query)
     core_data = cur.fetch_pandas_all()
     
     return func.HttpResponse(body=core_data.to_json(date_format="iso", orient="split"))
-   
