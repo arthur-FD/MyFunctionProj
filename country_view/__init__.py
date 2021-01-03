@@ -9,7 +9,7 @@ import pandas as pd
 import snowflake.connector
 import yaml
 import pathlib
-from test_cli.utils.config_loader import ConfigLoader
+from country_view.utils.config_loader import ConfigLoader
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
