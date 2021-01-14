@@ -24,7 +24,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     print(req_body)
 
 
-    if regions!=[] and countries!=[]:
+    if req_body['regions']!=[] and req_body['countries']!=[]:
         if len (req_body['countries'])==1:
             countries=str(tuple(req_body['countries']))[:-2]+')'
         else:
@@ -40,7 +40,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             INNER JOIN GEO_COUNTRY_TEST ON EV_VOLUMES_TEST.SALES_COUNTRY_CODE=GEO_COUNTRY_TEST.COUNTRY_CODE WHERE EV_VOLUMES_TEST.SALES_COUNTRY_CODE IN {countries} and GEO_COUNTRY_TEST.REGION IN {regions}
             GROUP BY EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE,EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,GEO_COUNTRY_TEST.REGION,EV_VOLUMES_TEST.SALES_COUNTRY_CODE
                 '''
-    elif regions==[] and countries!=[]:
+    elif req_body['regions']==[] and req_body['countries']!=[]:
         if len (req_body['countries'])==1:
             countries=str(tuple(req_body['countries']))[:-2]+')'
         else:
@@ -52,7 +52,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             INNER JOIN GEO_COUNTRY_TEST ON EV_VOLUMES_TEST.SALES_COUNTRY_CODE=GEO_COUNTRY_TEST.COUNTRY_CODE WHERE EV_VOLUMES_TEST.SALES_COUNTRY_CODE IN {countries}
             GROUP BY EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE,EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,GEO_COUNTRY_TEST.REGION,EV_VOLUMES_TEST.SALES_COUNTRY_CODE
                 '''
-    elif regions!=[] and countries==[]:
+    elif req_body['regions']!=[] and req_body['countries']==[]::
         if len(req_body['regions'])==1:
             regions=str(tuple(req_body['regions']))[:-2]+')'
         else:
