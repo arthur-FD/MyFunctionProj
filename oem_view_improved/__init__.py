@@ -22,16 +22,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         core_query = file.read()
     req_body = req.get_json()
     print(req_body)
-    if len (req_body['countries'])==1:
-        countries=str(tuple(req_body['countries']))[:-2]+')'
-    else:
-        countries=str(tuple(req_body['countries']))
-    if len(req_body['regions'])==1:
-        regions=str(tuple(req_body['regions']))[:-2]+')'
-    else:
-        regions=str(tuple(req_body['regions']))
+
 
     if regions!=[] and countries!=[]:
+        if len (req_body['countries'])==1:
+            countries=str(tuple(req_body['countries']))[:-2]+')'
+        else:
+            countries=str(tuple(req_body['countries']))
+        if len(req_body['regions'])==1:
+            regions=str(tuple(req_body['regions']))[:-2]+')'
+        else:
+            regions=str(tuple(req_body['regions']))        
         core_query=f'''
             SELECT  EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE, EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,SUM(EV_VOLUMES_TEST.VALUE)
             FROM EV_VOLUMES_TEST
@@ -40,6 +41,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             GROUP BY EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE,EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,GEO_COUNTRY_TEST.REGION,EV_VOLUMES_TEST.SALES_COUNTRY_CODE
                 '''
     elif regions==[] and countries!=[]:
+        if len (req_body['countries'])==1:
+            countries=str(tuple(req_body['countries']))[:-2]+')'
+        else:
+            countries=str(tuple(req_body['countries']))
         core_query=f'''
             SELECT  EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE, EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,SUM(EV_VOLUMES_TEST.VALUE)
             FROM EV_VOLUMES_TEST
@@ -48,6 +53,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             GROUP BY EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE,EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,GEO_COUNTRY_TEST.REGION,EV_VOLUMES_TEST.SALES_COUNTRY_CODE
                 '''
     elif regions!=[] and countries==[]:
+        if len(req_body['regions'])==1:
+            regions=str(tuple(req_body['regions']))[:-2]+')'
+        else:
+            regions=str(tuple(req_body['regions']))      
         core_query=f'''
             SELECT  EV_VOLUMES_TEST.OEM_GROUP, EV_VOLUMES_TEST.BRAND,EV_VOLUMES_TEST.PROPULSION,EV_VOLUMES_TEST.MODEL_ID,VEHICLE_SPEC_TEST.CATHODE, EV_VOLUMES_TEST.PERIOD_GRANULARITY,EV_VOLUMES_TEST.DATE,SUM(EV_VOLUMES_TEST.VALUE)
             FROM EV_VOLUMES_TEST
